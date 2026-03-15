@@ -80,6 +80,7 @@ const dashboardActor = actor({
 
 				const data = await fetchData()
 				c.state.data = data
+				c.state.lastUpdated = new Date()
 				c.broadcast('updatedData', data)
 
 				scheduleNext(c, 30000, "updateData")

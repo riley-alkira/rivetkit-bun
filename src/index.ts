@@ -11,9 +11,8 @@ app.all("/api/rivet/*", async (c) => {
   return registry.handler(c.req.raw);
 })
 
-Bun.serve({
-  fetch: app.fetch,
-  port: Number(process.env.PORT ?? 3000),
-  hostname: "0.0.0.0",
-  idleTimeout: 120
-});
+app.get('/', (c) => {
+  return c.text('Hello Hono!')
+})
+
+export default app;

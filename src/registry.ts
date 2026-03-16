@@ -50,6 +50,9 @@ function scheduleNext(c: ScheduleContext, delayMs: number, action: string): void
 }
 
 const dashboardActor = actor({
+	options: {
+		noSleep: true
+	},
 	createState: async () => {
 		const data = await fetchData()
 
@@ -75,6 +78,8 @@ const dashboardActor = actor({
 		},
 
 		updateData: async (c, scheduleToken: string) => {
+			if (c.aborted) return;
+
 			if (c.conns.size > 0) {
 				if (scheduleToken !== c.state.scheduleToken) return;
 

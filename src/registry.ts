@@ -5,6 +5,7 @@ export interface DashboardActorState {
 	nextUpdate: Date | null;
 	scheduleToken: string | null;
 	data: Recipe;
+	version: string;
 }
 
 export interface Recipe {
@@ -87,7 +88,7 @@ const dashboardActor = actor({
 				c.state.data = data
 				c.state.lastUpdated = new Date()
 				c.broadcast('updatedData', data)
-
+				c.state.version = process.env.RIVET_RUNNER_VERSION ?? "unknown"
 				scheduleNext(c, 30000, "updateData")
 			} else {
 				c.destroy();

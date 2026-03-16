@@ -1,8 +1,9 @@
 {
   "name": "rivet-bun",
+  "version": "0.0.4",
   "scripts": {
-    "dev": "bun run --hot src/index.ts",
-    "start": "NODE_ENV=production bun run src/index.ts"
+    "dev": "RIVET_RUNNER_VERSION=$(node -p \"require('./package.json').version\") bun run --hot src/index.ts",
+    "start": "RIVET_RUNNER_VERSION=$(node -p \"require('./package.json').version\") NODE_ENV=production bun run src/index.ts"
   },
   "dependencies": {
     "hono": "^4.12.7",
